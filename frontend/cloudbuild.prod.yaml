@@ -1,14 +1,18 @@
 steps:
   - name: 'gcr.io/cloud-builders/npm'
     id: "Install dependencies"
+    dir: 'frontend/'
     args: [ 'install' ]
+
   - name: 'gcr.io/cloud-builders/npm'
     id: "Run unit tests"
     args: [ 'run', 'test:unit' ]
+    dir: 'frontend/'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: "Build the container image"
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/frontend', '.']
+    dir: 'frontend/'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: "Push the image to Container Registry"
