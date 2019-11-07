@@ -1,11 +1,13 @@
 <template>
   <div class="home__container">
     <div class="home__title-box">
-      <title-box text="Built and Deployed with Cloud Build and Firebase Hosting" />
+      <title-box
+        text="Built and Deployed with Cloud Build and Cloud Run"
+      />
     </div>
     <div class="home__icons-container">
       <cloud-build-icon />
-      <firebase-hosting-icon />
+      <cloud-run-icon />
     </div>
   </div>
 </template>
@@ -14,13 +16,14 @@
 import TitleBox from "@/components/TitleBox.vue";
 import CloudBuildIcon from "@/components/CloudBuildIcon.vue";
 import FirebaseHostingIcon from "@/components/FirebaseHostingIcon.vue";
+import CloudRunIcon from "@/components/CloudRunIcon.vue";
 
 export default {
   name: "home",
   components: {
     TitleBox,
     CloudBuildIcon,
-    FirebaseHostingIcon
+    CloudRunIcon
   }
 };
 </script>
@@ -35,6 +38,6 @@ export default {
   margin: 3rem 0;
 }
 .home__icons-container > svg {
-  padding: 0px 5rem;
+  padding: 0 5rem;
 }
 </style>

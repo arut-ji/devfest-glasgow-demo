@@ -1,6 +1,6 @@
 <template>
   <div class="title-container">
-    <h1>{{text}}</h1>
+    <h1>{{ text }}</h1>
   </div>
 </template>
 
@@ -16,6 +16,6 @@ export default {
 <style scoped>
 .title-container {
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 </style>

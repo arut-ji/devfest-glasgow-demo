@@ -84,9 +84,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 export default Vue.extend({
-    name: "firebase-hosting-icon"
+  name: "firebase-hosting-icon"
 });
 </script>
 
