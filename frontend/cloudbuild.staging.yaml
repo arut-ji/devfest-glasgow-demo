@@ -1,0 +1,15 @@
+steps:
+  - name: "node:lts-alpine"
+    entrypoint: npm
+    dir: 'client/'
+    args: ["install"]
+  - name: "node:lts-alpine"
+    entrypoint: npm
+    args: ["install", "-g", "firebase-tools"]
+  - name: "node:lts-alpine"
+    entrypoint: npm
+    dir: 'client/'
+    args: ["run", "build"]
+  - name: "node:lts-alpine"
+    entrypoint: "./node_modules/.bin/firebase"
+    args: ["deploy", "--project", "$PROJECT_ID", "--token", "$_TOKEN"]

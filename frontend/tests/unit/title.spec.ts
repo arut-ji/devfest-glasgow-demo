@@ -1,10 +1,10 @@
 import { shallowMount } from "@vue/test-utils";
-import Title from "@/components/Title.vue";
+import TitleBox from "@/components/TitleBox.vue";
 
-describe("Title.vue", () => {
+describe("TitleBox.vue", () => {
   it("renders props.text when passed", () => {
     const text = "new message";
-    const wrapper = shallowMount(Title, {
+    const wrapper = shallowMount(TitleBox, {
       propsData: {
         text
       }
