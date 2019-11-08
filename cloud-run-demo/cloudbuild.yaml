@@ -1,0 +1,14 @@
+steps:
+- name: 'gcr.io/cloud-builder/docker'
+  id: "Build the container image."
+  args: [
+    "build", "-t", "grc.io/$PROJECT_ID/cloud-run-demo:$COMMIT_SHA","."
+  ]
+- name: 'gcr.io/cloud-builder/docker'
+  id: "Push the container image to GCR."
+  args: [
+    "push", "grc.io/$PROJECT_ID/cloud-run-demo:$COMMIT_SHA"
+  ]
+
+images:
+  - "gcr.io/$PROJECT_ID/cloud-run-demo:$COMMIT_SHA"
