@@ -2,8 +2,8 @@ import {Client, FollowEvent} from '@line/bot-sdk';
 import UserService from '../services/users';
 
 export const client = new Client({
-    channelAccessToken: 'eHGmpQ7rTBqASSG7S24W1k06SH3J8vChLHOtHK4LUnu384N+8Kf4e9pfa7osScAF0n2O1LAkoicY+kRWGUAHhVEYBe4jskCfvIWkHeHqzeSaxWLn/xGADgyyKXMp7hlvVsQcmAKBm5YkOz6H1D0MyAdB04t89/1O/w1cDnyilFU=',
-    channelSecret: '44ed9a52daea402139f0d978cbbafb59'
+    channelAccessToken: '',
+    channelSecret: ''
 });
 
 export const followEventHandler = async (event: FollowEvent) => {
