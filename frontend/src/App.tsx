@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import logo from "./coffee.svg";
+import { Menu } from "./types/index";
+import MenuList from "./components/menu-list";
+import { Title, Container, Wrapper, Logo, LoadingLogo } from "./App.style";
+
+const url = 'https://staging-backend-oiyrveq75a-ew.a.run.app';
 
 const App: React.FC = () => {
+  const [menus, setMenus] = useState<Array<Menu>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchData = async () => {
+      await fetch(`${url}/menus`)
+        .then(response => response.json())
+        .then(menus => {
+          setMenus(menus);
+          setIsLoading(false);
+        })
+        .catch(e => {
+          console.error(e);
+        });
+    };
+    fetchData();
+  }, []);
+
+  if(isLoading) {
+    return (
+      <Container>
+        <LoadingLogo src={logo} alt="logo"/>
+      </Container> 
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Wrapper>
+        <Logo src={logo} alt="logo"/>
+        <Title>Glasgow DevFest Coffee Shop</Title>
+        <MenuList menuItems={menus} />{" "}
+      </Wrapper>
+    </Container>
   );
-}
+};
 
 export default App;

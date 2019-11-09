@@ -1,7 +1,7 @@
 import express from 'express';
-
+import cors from 'cors';
 const app = express();
-
+app.use(cors({origin:true}))
 
 type Menu = {
     name: string,
@@ -34,6 +34,10 @@ const menus: Menu[] = [
         name: 'Caramel Macchiato',
         price: 2.0
     },
+    {
+        name: 'Oreo Frappucino',
+        price: 3.0
+    }
 ]   
 
 app.use('/_healthcheck', (_, res) => {
@@ -41,8 +45,6 @@ app.use('/_healthcheck', (_, res) => {
 });
 
 app.get('/menus', (_, response) => {
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    response.setHeader('Access-Control-Allow-Origin', "Origin, X-Requested-With, Content-Type, Accept")
     response.status(200).json(menus);
 })
 
