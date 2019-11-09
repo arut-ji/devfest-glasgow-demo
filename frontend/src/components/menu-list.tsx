@@ -36,7 +36,7 @@ const MenuItem: React.FC<MenuItemProps> = ({name, price}) => {
     return (
         <Item>
             <p>Name: <span>{name}</span></p>
-            <p>Price: <span>£{price.toFixed(2)}</span></p>
+            <p>Price: <span>{price}</span></p>
         </Item>    
     )
 }
