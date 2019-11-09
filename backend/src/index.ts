@@ -33,10 +33,6 @@ const menus: Menu[] = [
     {
         name: 'Caramel Macchiato',
         price: 2.0
-    },
-    {
-        name: 'Oreo Frappucino',
-        price: 3.0
     }
 ]   
 
