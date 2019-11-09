@@ -4,7 +4,7 @@ import { Menu } from "./types/index";
 import MenuList from "./components/menu-list";
 import { Title, Container, Wrapper, Logo, LoadingLogo } from "./App.style";
 
-const url = 'https://staging-backend-oiyrveq75a-ew.a.run.app';
+const url = `https://${process.env.REACT_APP_STAGE}-backend-oiyrveq75a-ew.a.run.app`;
 
 const App: React.FC = () => {
   const [menus, setMenus] = useState<Array<Menu>>([]);

@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "gcp-kitchen-sink"
+  },
+  "targets": {
+    "gcp-kitchen-sink": {
+      "hosting": {
+        "production": [
+          "devfest-coffee-production"
+        ],
+        "staging": [
+          "devfest-coffee-staging"
+        ]
+      }
+    }
+  }
+}
