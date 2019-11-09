@@ -23,7 +23,7 @@ const menus: Menu[] = [
         price: 1.7
     },
     {
-        name: 'Moccha',
+        name: 'Mocha',
         price: 1.8
     },
     {
