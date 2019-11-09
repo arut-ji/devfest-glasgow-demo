@@ -1,0 +1,22 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'backend'
+  id: "Build the container image."
+  args: [
+    "build", "-t", "gcr.io/$PROJECT_ID/staging-backend:latest","."
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'backend'
+  id: "Push the container image to GCR."
+  args: [
+    "push", "gcr.io/$PROJECT_ID/staging-backend:latest"
+  ]
+- name: 'gcr.io/cloud-builders/gcloud'
+  dir: 'backend'
+  id: "Deploy to Staging Environment"
+  args: [
+    "beta", "run", "deploy", "staging-backend", "--image", "gcr.io/$PROJECT_ID/staging-backend:latest", "--region", "europe-west1", "--platform", "managed", "--allow-unauthenticated"
+  ]
+
+images:
+  - "gcr.io/$PROJECT_ID/staging-backend:latest"

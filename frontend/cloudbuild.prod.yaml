@@ -1,26 +1,30 @@
 steps:
-  - name: 'gcr.io/cloud-builders/npm'
-    id: "Install dependencies"
-    dir: 'frontend/'
-    args: [ 'install' ]
+- name: 'gcr.io/cloud-builders/npm'
+  dir: 'frontend'
+  id: 'Install node_modules dependencies'
+  args: ["install"]
 
-  - name: 'gcr.io/cloud-builders/npm'
-    id: "Run unit tests"
-    args: [ 'run', 'test:unit' ]
-    dir: 'frontend/'
+- name: 'gcr.io/cloud-builders/npm'
+  dir: 'frontend'
+  id: 'Run tests'
+  args: ["run", "test:ci"]
 
-  - name: 'gcr.io/cloud-builders/docker'
-    id: "Build the container image"
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/frontend', '.']
-    dir: 'frontend/'
+- name: 'gcr.io/cloud-builders/npm'
+  dir: 'frontend' 
+  id: 'Buidl for staging deployment'
+  args: ["run", "build:prod"]
 
-  - name: 'gcr.io/cloud-builders/docker'
-    id: "Push the image to Container Registry"
-    args: ['push', 'gcr.io/$PROJECT_ID/frontend']
+- name: 'gcr.io/$PROJECT_ID/firebase'
+  dir: 'frontend'
+  id: 'Deploy to Staging'
+  args: [
+    'deploy',
+    '--only',
+    'hosting:production'
+  ]
+  secretEnv: ['FIREBASE_TOKEN']
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: "Deploy image to Cloud Run"
-    args: ['beta', 'run', 'deploy', 'frontend-demo', '--image', 'gcr.io/$PROJECT_ID/frontend', '--region', 'europe-west1', '--platform', 'managed', '--allow-unauthenticated']
-
-images:
-  - gcr.io/$PROJECT_ID/frontend
+secrets:
+- kmsKeyName: 'projects/gcp-kitchen-sink/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-ci-token'
+  secretEnv:
+    FIREBASE_TOKEN: 'CiQAOgOZAYaFZkVIvXHZmV4RiNVZgmacHin9C6HxeTQUyAVnFp8SkAEApVO2SBh4gI9I41TUl2cRFdk+xzA1lp/r0+Ws2DI0GgcSRxK3xO2b+woPncKVWVBLRrHW3nzndacLWz5z7VqC/er3krF7VPyLbeY1V72WKWbwh8MF7StcWjOZWQFdB/NtzRsKRczfQg2ArTL+RNvyN3QrXPdXVZtxpty7fi0O/JpgQ4ZdhcsC9h04IR1y28U='

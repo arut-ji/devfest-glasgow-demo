@@ -1,0 +1,19 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: "Build the container image."
+  args: [
+    "build", "-t", "gcr.io/$PROJECT_ID/cloud-run-demo:latest","."
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: "Push the container image to GCR."
+  args: [
+    "push", "gcr.io/$PROJECT_ID/cloud-run-demo:latest"
+  ]
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: "Deploy to Cloud Run"
+  args: [
+    "beta", "run", "deploy", "cloud-run-demo", "--image", "gcr.io/$PROJECT_ID/cloud-run-demo:latest", "--region", "europe-west1", "--platform", "managed", "--allow-unauthenticated"
+  ]
+
+images:
+  - "gcr.io/$PROJECT_ID/cloud-run-demo:latest"
